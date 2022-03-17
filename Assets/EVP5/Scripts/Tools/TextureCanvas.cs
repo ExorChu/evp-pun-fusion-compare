@@ -546,7 +546,7 @@ public class TextureCanvas
 
 	Color32 GetAlphaBlendedPixel (Color32 dst)
 		{
-		Color32 pixel;
+		Color32 pixel = default;
 		pixel.r = (byte)(m_color.r*m_srcAlpha + dst.r*m_dstAlpha);
 		pixel.g = (byte)(m_color.g*m_srcAlpha + dst.g*m_dstAlpha);
 		pixel.b = (byte)(m_color.b*m_srcAlpha + dst.b*m_dstAlpha);
