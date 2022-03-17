@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Game/Fusion/Scenes/FusionSharedStartScene.unity
+    guid: 70704020b69dab14480df43f319136ba
+  - enabled: 1
+    path: Assets/Game/Fusion/Scenes/FusionSharedNetworkScene.unity
+    guid: 928bd339eadabda4c98c04ce126938c4
   m_configObjects: {}
