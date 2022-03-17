@@ -412,6 +412,7 @@ namespace EVP
 
         void Update()
         {
+            return;
             if (wheelUpdateRate == UpdateRate.Disabled)
             {
                 ComputeSteerAngle();
@@ -492,7 +493,7 @@ namespace EVP
                     UpdateSteering(wd);
 
                 UpdateSuspension(wd);
-                UpdateLocalFrame(wd);
+                UpdateLocalFrame(wd,dt);
                 UpdateGroundMaterial(wd);
 
                 ComputeTireForces(wd);
@@ -540,6 +541,7 @@ namespace EVP
 
         void FixedUpdate()
         {
+            return;
             if (!disallowRuntimeChanges)
                 ConfigureCenterOfMass();
 
@@ -621,6 +623,8 @@ namespace EVP
 
             m_rigidbody.AddForceAtPosition(dragForce, aeroAppPoint);
             if (groundedWheels > 0) m_rigidbody.AddForceAtPosition(loadForce, aeroAppPoint);
+
+            Debug.Log($"Add force amount: {dragForce.ToString("F6")} | sqrVel : {sqrVelocity.ToString("F6")} | normalVel: {normalizedVelocity.ToString("F6")}");
 
             // CommonTools.DrawCrossMark (aeroAppPoint, m_transform.forward, m_transform.right, m_transform.up, Color.magenta);
             // debugText = string.Format("AeroDrag: {0,6:0.} AeroForce: {1,6:0.}", dragForce.magnitude, loadForce.magnitude);
@@ -717,7 +721,7 @@ namespace EVP
         }
 
 
-        void UpdateLocalFrame(WheelData wd)
+        void UpdateLocalFrame(WheelData wd,float dt = 0)
         {
             // Speed of the wheel rig
 
@@ -790,7 +794,7 @@ namespace EVP
             }
 
             float estimatedSprungMass = Mathf.Clamp(wd.hit.force / -Physics.gravity.y, 0.0f, wd.collider.sprungMass) * 0.5f;
-            Vector2 localVelocityForce = -estimatedSprungMass * wd.localVelocity / Time.deltaTime;
+            Vector2 localVelocityForce = -estimatedSprungMass * wd.localVelocity / dt;// Time.deltaTime;
 
             wd.localRigForce = localVelocityForce + localSurfaceForce;
         }

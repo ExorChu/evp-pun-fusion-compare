@@ -19,10 +19,16 @@ namespace Game.FusionNetwork.Shared
     public class FusionVehicle : NetworkBehaviour, INetworkRunnerCallbacks
     {
         private VehicleController vController;
+        private Rigidbody rb;
+
+        [Networked] public Vector3 Position { get; set; }
+        [Networked] public Quaternion Rotation { get; set; }
+
 
         void Awake()
         {
             vController = GetComponent<VehicleController>();
+            rb = GetComponent<Rigidbody>();
         }
         public override void Spawned()
         {
@@ -47,16 +53,26 @@ namespace Game.FusionNetwork.Shared
         {
             if(GetInput(out VInput input))
             {
+
                 vController.steerInput = input.steer;
                 vController.throttleInput = input.throttle;
                 vController.brakeInput = input.brake;
 
                 vController.ManualFixedUpdate(Runner.DeltaTime);
+
+                Position = rb.position;
+                Rotation = rb.rotation;
+            }
+
+            if(Object.IsProxy)
+            {
+                //rb.position = Vector3.Lerp(rb.position, Position, Runner.DeltaTime * 50f);
+                //rb.rotation = Quaternion.Lerp(rb.rotation, Rotation, Runner.DeltaTime * 50f);
             }
         }
 
         public override void Render()
-        {
+        {           
             vController.ManualVisualUpdate();
         }
 

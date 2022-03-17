@@ -287,6 +287,7 @@ public class VehicleAudio : MonoBehaviour
 
 	void Update ()
 		{
+			return;
 		DoEngineAudio();
 
 		// At this point these values are available:
@@ -309,6 +310,7 @@ public class VehicleAudio : MonoBehaviour
 
 	void FixedUpdate ()
 		{
+			return;
 		if (m_vehicle.wheelData.Length != m_audioData.Length)
 			InitializeAudioData();
 
