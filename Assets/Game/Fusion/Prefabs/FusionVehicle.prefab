@@ -401,8 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  _Position: {x: 0, y: 0, z: 0}
-  _Rotation: {x: 0, y: 0, z: 0, w: 0}
+  interpolate: {fileID: 999538251881905783}
 --- !u!114 &3479919202140150990
 MonoBehaviour:
   m_ObjectHideFlags: 0

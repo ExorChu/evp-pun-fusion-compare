@@ -537,7 +537,7 @@ public class VehicleCameraController : MonoBehaviour
 
 		if (followCenterOfMass && target != null)
 			{
-			m_targetRigidbody = target.GetComponent<Rigidbody>();
+			m_targetRigidbody = target.GetComponentInParent<Rigidbody>();
 			m_localTargetOffset = m_targetRigidbody.centerOfMass;
 			}
 		else
